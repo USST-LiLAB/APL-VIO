@@ -63,8 +63,6 @@ This project is released under the [GNU General Public License v3.0](LICENSE).
 
 ### Contact
 
-- Lab / organization: [USST-LiLAB](https://github.com/USST-LiLAB)
-- Paper contact: wangyan_li@usst.edu.cn
-- Corresponding author: Wei Xiao (xiaow@sdju.edu.cn)
+- [wangyan_li@usst.edu.cn](mailto:wangyan_li@usst.edu.cn)
 
 If you find this work useful, please consider starring the repository.
