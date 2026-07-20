@@ -1,0 +1,5 @@
+<launch>
+    <node name="analysis" pkg="analysis" type="analysis_node" output="log" >
+
+    </node>
+</launch>

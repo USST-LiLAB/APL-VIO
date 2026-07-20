@@ -1,0 +1,27 @@
+<launch>
+    <arg name="config_file"     default = "$(find aplvio)/../config/real/kitti/kitti_stereo_config.yaml" />
+    <arg name="output_folder"   default = "$(find aplvio)/../output/" />
+    <arg name="rviz_path"       default = "$(find aplvio)/../config/rviz/rviz_aplvio_config.rviz" />
+    <arg name="dataset_path"    default = "$(find aplvio)/../../../../../datasets/kitti/kitti00/dataset/sequences/00/" />
+
+	<node name="aplvio" pkg="aplvio"  type="aplvio_kitti_node" output="screen" args="$(arg dataset_path)">
+        <rosparam command="load" file="$(arg config_file)" />
+        <param name="config_path" type="string" value="$(arg config_file)" />
+        <param name="output_path" type="string" value="$(arg output_folder)" />
+	</node>
+
+    <arg name="doloop"          default="true" />
+    <arg name="dorviz"          default="true" />
+
+    <group if="$(arg doloop)">
+        <node name="loop_fusion" pkg="loop_fusion"  type="loop_fusion_node" output="screen">
+            <rosparam command="load" file="$(arg config_file)" />
+            <param name="config_path" type="string" value="$(arg config_file)" />
+            <param name="output_path" type="string" value="$(arg output_folder)" />
+        </node>
+    </group>
+
+    <group if="$(arg dorviz)">
+        <node name="rvizvisualisation" pkg="rviz" type="rviz" output="log" args="-d $(arg rviz_path)" />
+    </group>
+</launch> 

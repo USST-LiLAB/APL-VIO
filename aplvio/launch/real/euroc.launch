@@ -1,0 +1,44 @@
+<launch>
+    <arg name="config_file"     default = "$(find aplvio)/../config/real/euroc/euroc_stereo_imu_config.yaml" />
+    <arg name="output_folder"   default = "$(find aplvio)/../output/" />
+    <arg name="rviz_path"       default = "$(find aplvio)/../config/rviz/rviz_aplvio_config.rviz" />
+
+	<node name="aplvio" pkg="aplvio"  type="aplvio_ros_node" output="screen">
+        <rosparam command="load" file="$(arg config_file)" />
+        <param name="config_path" type="string" value="$(arg config_file)" />
+        <param name="output_path" type="string" value="$(arg output_folder)" />
+	</node>
+
+    <arg name="doloop"          default="true" />
+    <arg name="dorviz"          default="true" />
+    <arg name="dobag"           default="true" />
+    <arg name="dobenchmark"     default="true" />
+
+    <group if="$(arg doloop)">
+        <node name="loop_fusion" pkg="loop_fusion"  type="loop_fusion_node" output="screen">
+            <rosparam command="load" file="$(arg config_file)" />
+            <param name="config_path" type="string" value="$(arg config_file)" />
+            <param name="output_path" type="string" value="$(arg output_folder)" />
+        </node>
+    </group>
+
+    <group if="$(arg dorviz)">
+        <node name="rvizvisualisation" pkg="rviz" type="rviz" output="log" args="-d $(arg rviz_path)" />
+    </group>
+
+    <group if="$(arg dobag)">
+        <!-- dataset settings -->
+        <!-- MH_01_easy MH_02_easy MH_03_medium MH_04_difficult MH_05_difficult 
+            V1_01_easy V1_02_medium V1_03_difficult V2_01_easy V2_02_medium V2_03_difficult -->
+        <arg name="sequence"        default = "MH_04_difficult" />
+        <arg name="dataset_path"    default = "$(find aplvio)/../../../../../datasets/euroc/$(arg sequence).bag" />
+        <node pkg="rosbag" type="play" name="rosbag" output="log" args="-s 0 -r 1 $(arg dataset_path)" />
+
+        <group if="$(arg dobenchmark)">
+            <include file="$(find benchmark)/launch/benchmark.launch">
+                <arg name="dataset"     value = "euroc" />
+                <arg name="sequence"    value = "$(arg sequence)" />
+            </include>
+        </group>
+    </group>
+</launch> 

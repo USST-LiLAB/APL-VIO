@@ -1,0 +1,33 @@
+# IDE / editor
+.vscode/
+.idea/
+*.swp
+*~
+.DS_Store
+
+# Catkin / CMake build artifacts
+build/
+devel/
+install/
+cmake-build-*/
+CMakeCache.txt
+CMakeFiles/
+*.pyc
+__pycache__/
+*.catkin_workspace
+
+# Runtime / experiment outputs (generated locally)
+output/
+*.bag
+
+# Media and documents (keep source tree lean)
+*.png
+*.jpg
+*.jpeg
+*.pdf
+*.svg
+
+# Temporary / debug dumps
+*.log
+*.tmp
+core

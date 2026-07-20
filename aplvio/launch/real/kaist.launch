@@ -1,0 +1,44 @@
+<launch>
+    <arg name="config_file"     default = "$(find aplvio)/../config/real/kaist/kaist_stereo_imu_config.yaml" />
+    <arg name="output_folder"   default = "$(find aplvio)/../output/" />
+    <arg name="rviz_path"       default = "$(find aplvio)/../config/rviz/rviz_aplvio_config.rviz" />
+
+	<node name="aplvio" pkg="aplvio"  type="aplvio_ros_node" output="screen">
+        <rosparam command="load" file="$(arg config_file)" />
+        <param name="config_path" type="string" value="$(arg config_file)" />
+        <param name="output_path" type="string" value="$(arg output_folder)" />
+	</node>
+
+    <arg name="doloop"          default="true" />
+    <arg name="dorviz"          default="true" />
+    <arg name="dobag"           default="true" />
+    <arg name="dobenchmark"     default="true" />
+
+    <group if="$(arg doloop)">
+        <node name="loop_fusion" pkg="loop_fusion"  type="loop_fusion_node" output="screen">
+            <rosparam command="load" file="$(arg config_file)" />
+            <param name="config_path" type="string" value="$(arg config_file)" />
+            <param name="output_path" type="string" value="$(arg output_folder)" />
+        </node>
+    </group>
+
+    <group if="$(arg dorviz)">
+        <node name="rvizvisualisation" pkg="rviz" type="rviz" output="log" args="-d $(arg rviz_path)" />
+    </group>
+
+    <group if="$(arg dobag)">
+        <!-- dataset settings -->
+        <!-- circle_fast circle_head circle infinite_fast infinite_head infinite rotation_fast rotation square_fast square_head square -->
+        <arg name="sequence"        default = "rotation" />
+        <arg name="dataset_path"    default = "$(find aplvio)/../../../../../datasets/kaist/$(arg sequence).bag" />
+        <!-- <node pkg="rosbag" type="play" name="rosbag" output="log" args="-s 60 -r 2 $(arg dataset_path)" /> -->
+        <node pkg="rosbag" type="play" name="rosbag" output="log" args="-s 0 -r 1 $(arg dataset_path)" />
+
+        <group if="$(arg dobenchmark)">
+            <include file="$(find benchmark)/launch/benchmark.launch">
+                <arg name="dataset"     value = "kaist" />
+                <arg name="sequence"    value = "$(arg sequence)" />
+            </include>
+        </group>
+    </group>
+</launch> 
