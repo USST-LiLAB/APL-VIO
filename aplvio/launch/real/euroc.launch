@@ -9,7 +9,7 @@
         <param name="output_path" type="string" value="$(arg output_folder)" />
 	</node>
 
-    <arg name="doloop"          default="true" />
+    <arg name="doloop"          default="false" />
     <arg name="dorviz"          default="true" />
     <arg name="dobag"           default="true" />
     <arg name="dobenchmark"     default="true" />

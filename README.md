@@ -43,7 +43,7 @@ If you use this code in your academic work, please cite the paper above.
 - **launch**
   - `cd ~/catkin_ws`
   - `source devel/setup.bash`
-  - `roslaunch aplvio euroc.launch dobag:=false`
+  - `roslaunch aplvio euroc.launch dobag:=false doloop:=false`
 - **play rosbag**
   - `rosbag play MH_01_easy.bag`
 
