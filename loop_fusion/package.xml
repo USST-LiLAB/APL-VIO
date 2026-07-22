@@ -2,11 +2,11 @@
 <package>
   <name>loop_fusion</name>
   <version>1.0.0</version>
-  <description>Loop closure module for APL-VINS (based on VINS-Fusion)</description>
+  <description>Loop closure module for APL-VIO (based on VINS-Fusion)</description>
 
   <maintainer email="wangyan_li@usst.edu.cn">Wangyan Li</maintainer>
   <license>GPLv3</license>
-  <url type="website">https://github.com/USST-LiLAB/APL-VINS</url>
+  <url type="website">https://github.com/USST-LiLAB/APL-VIO</url>
 
 
   <!-- The *_depend tags are used to specify dependencies -->

@@ -2,11 +2,11 @@
 <package>
   <name>camera_model</name>
   <version>1.0.0</version>
-  <description>Camera models and calibration utilities used by APL-VINS</description>
+  <description>Camera models and calibration utilities used by APL-VIO</description>
 
   <maintainer email="wangyan_li@usst.edu.cn">Wangyan Li</maintainer>
   <license>GPLv3</license>
-  <url type="website">https://github.com/USST-LiLAB/APL-VINS</url>
+  <url type="website">https://github.com/USST-LiLAB/APL-VIO</url>
 
 
   <!-- The *_depend tags are used to specify dependencies -->

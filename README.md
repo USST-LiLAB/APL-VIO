@@ -1,4 +1,4 @@
-# APL-VINS
+# APL-VIO
 
 ROS implementation of **APL-VIO**: Real-Time Visual-Inertial Odometry Using Adaptive Point-Line Features.
 
@@ -21,7 +21,7 @@ If you use this code in your academic work, please cite the paper above.
 ### Build
 - **download the source package**
   - `mkdir -p ~/catkin_ws/src && cd ~/catkin_ws/src`
-  - `git clone https://github.com/USST-LiLAB/APL-VINS.git`
+  - `git clone https://github.com/USST-LiLAB/APL-VIO.git`
 - **build with OpenCV installed by yourself *(install in `/usr/local`)***
   - `gedit camera_model/CMakeLists.txt`
   - Modify `set(OpenCV_DIR "/usr/local/lib/cmake/opencv4")`
@@ -39,7 +39,7 @@ If you use this code in your academic work, please cite the paper above.
 
 ### Run
 - **prepare output folder**
-  - `mkdir -p ~/catkin_ws/src/APL-VINS/output`
+  - `mkdir -p ~/catkin_ws/src/APL-VIO/output`
 - **launch**
   - `cd ~/catkin_ws`
   - `source devel/setup.bash`
